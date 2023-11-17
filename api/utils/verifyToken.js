@@ -28,8 +28,10 @@ export const verifyUser = (req,res,next)=>{
 export const verifyAdmin = (req,res,next)=>{
     verifyToken(req,res,next, ()=>{
         if(req.user.isAdmin){
+            console.log("yes it's admin");
             next()
         }else{
+            console.log("not admin");
             if(err) return next(createError(403, "You are not authorized!"))
         }
     })
