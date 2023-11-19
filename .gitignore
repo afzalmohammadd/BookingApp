@@ -13,8 +13,8 @@ yarn-error.log*
 # Ignore dependencies 
 /api/node_modules
 /api/.env
-/client/node_modules
-/client/.pnp
+/frontEnd/node_modules
+/frontEnd/.pnp
 .pnp.js
-/client/coverage
-/client/build
+/frontEnd/coverage
+/frontEnd/build
