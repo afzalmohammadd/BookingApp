@@ -26,7 +26,7 @@ const Login = () => {
     }
   }
 
-  console.log(user);
+  console.log(user,"yaah!!!");
 
   
   return (
@@ -46,7 +46,7 @@ const Login = () => {
           onChange={handleChange}
           className="lInput"
         />
-        <button className="lButton">Login</button>
+        <button onClick={handleClick} className="lButton">Login</button>
         {error && <span>{error.message}</span>}
       </div>
     </div>
