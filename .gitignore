@@ -18,3 +18,4 @@ yarn-error.log*
 .pnp.js
 /frontEnd/coverage
 /frontEnd/build
+/admin/node_modules
