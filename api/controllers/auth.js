@@ -5,17 +5,34 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   try {
+    console.log("pppp");
+    console.log(req.body);
+    console.log(req.file,"pppasdf");
+
+
+    const { username, email, password , country ,city,phone } = req.body;
+
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt);
+    const hash = bcrypt.hashSync(password,salt)
 
     const newUser = new User({
-      ...req.body,
+      username,
+      email,
+      country,
+      city,
+      phone,
       password: hash,
-    });
+      img: `/uploads/${req.file.filename}`
+    })
 
     await newUser.save();
+
+    console.log(newUser,"NU");
+
+  
     res.status(200).send("User has been created");
   } catch (err) {
+    console.error(err)
     next(err);
   }
 };
