@@ -4,9 +4,10 @@ const HotelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    required: true,
+  propertyType: {
+    type: mongoose.ObjectId,
+    ref: "Property",
+    required: true
   },
   city: {
     type: String,
@@ -30,23 +31,7 @@ const HotelSchema = new mongoose.Schema({
   desc: {
     type: String,
     required: true,
-  },
-  rating: {
-    type: Number,
-    min: 0,
-    max: 5,
-  },
-  rooms: {
-    type: [String],
-  },
-  cheapestPrice: {
-    type: Number,
-    required: true,
-  },
-  featured: {
-    type: Boolean,
-    default: false,
-  },
+  }
 });
 
 export default mongoose.model("Hotel", HotelSchema)
