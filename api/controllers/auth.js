@@ -38,7 +38,6 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const expirationTime = new Date(Date.now() + 3600000);
   try {
     const user = await User.findOne({ username: req.body.username });
 
@@ -62,13 +61,18 @@ export const login = async (req, res, next) => {
       process.env.JWT
     );
 
+    if(user.isAdmin == true){
+      console.log("admin here");
+    }else{
+      console.log("not admin");
+    }
+
     const { password, isAdmin, ...otherDetails } = user._doc;
     
     return res
       .cookie("access_token", token, {
         httpOnly: false,
-        withCredentials: true,
-        expires: expirationTime
+        withCredentials: true
       })
       .status(200)
       .json({ details:{...otherDetails}, isAdmin });

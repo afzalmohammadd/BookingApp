@@ -1,11 +1,14 @@
 import express from "express";
 import { createHotel,updateHotel,deleteHotel,getHotel,getHotels,countByCity,countByType,getHotelRooms } from "../controllers/hotel.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
+import multer from "multer";
+const upload = multer({ dest: "uploads/" });
 
 const router = express.Router();
 
+console.log("inside hotel route");
 // CREATE
-router.post("/",verifyAdmin, createHotel)
+router.post("/create",upload.single("image"), createHotel)
 
 // UPDATE
 router.put("/:id",verifyAdmin, updateHotel)

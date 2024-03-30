@@ -1,19 +1,40 @@
 import Hotel from "../models/Hotel.js";
 import { createError } from "../utils/error.js";
 import Room from "../models/Room.js";
+import Property from "../models/Property.js";
 
 export const createHotel = async (req, res, next) => {
-  const newHotel = new Hotel(req.body);
-
   try {
+    console.log("Inside createHotel");
+    console.log(req.body, "Adding Hotel Details");
+    
+    const { name, city, address, phone, propertyType } = req.body;
+
+    const foundProperty = await Property.findById(propertyType);
+
+    if (!foundProperty) {
+      return res.status(404).json({ error: "Property not found" });
+    }
+
+    const newHotel = new Hotel({
+      name,
+      city,
+      address,
+      phone,
+      propertyType: foundProperty._id,
+      photos: `/uploads/${req.file.filename}`
+    });
+
     const savedHotel = await newHotel.save();
-    res.status(200).json(savedHotel);
+
+    res.status(201).json(savedHotel); // Send the saved hotel data in the response
   } catch (err) {
     // Handle error
     console.log(err);
     res.status(500).json(err);
   }
 };
+
 
 export const updateHotel = async (req, res, next) => {
   try {
