@@ -38,6 +38,7 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
+  const expirationTime = new Date(Date.now() + 3600000);
   try {
     const user = await User.findOne({ username: req.body.username });
 
@@ -65,11 +66,14 @@ export const login = async (req, res, next) => {
     
     return res
       .cookie("access_token", token, {
-        httpOnly: true,
+        httpOnly: false,
+        withCredentials: true,
+        expires: expirationTime
       })
       .status(200)
       .json({ details:{...otherDetails}, isAdmin });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };

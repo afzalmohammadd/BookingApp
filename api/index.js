@@ -34,7 +34,10 @@ mongoose.connection.on('disconnected', () => {
 });
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true // Allow cookies to be sent with the request
+}));
 app.use(cookieParser());
 app.use(express.json());
 

@@ -17,21 +17,13 @@ const HotelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  distance: {
-    type: String,
-    required: true,
-  },
   photos: {
     type: [String],
   },
-  title: {
+  phone: {
     type: String,
     required: true,
   },
-  desc: {
-    type: String,
-    required: true,
-  }
 });
 
 export default mongoose.model("Hotel", HotelSchema)

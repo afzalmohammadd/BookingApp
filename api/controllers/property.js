@@ -22,6 +22,7 @@ export const createPropertyType = async (req, res, next) => {
 };
 
 export const getTypes = async (req, res, next) => {
+  console.log("inside getTypes");
   try {
       const PropertyTypes = await Property.find()
       res.status(200).json(PropertyTypes)
